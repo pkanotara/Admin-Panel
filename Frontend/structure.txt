@@ -1,0 +1,46 @@
+Frontend/
+├── public/
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── assets/
+│   │   └── react.svg
+│   ├── components/
+│   │   ├── admin/
+│   │   │   └── Sidebar.tsx
+│   │   └── common/
+│   │       └── ProductGrid.tsx
+│   ├── layout/
+│   │   └── Navbar.tsx
+│   ├── pages/
+│   │   ├── admin/
+│   │   │   ├── AdminLogin.tsx
+│   │   │   ├── AdminSummary.tsx
+│   │   │   ├── FoodManagement.tsx
+│   │   │   └── UserManagement.tsx
+│   │   └── public/
+│   │       ├── ContactForm.tsx
+│   │       └── Reviews.tsx
+│   ├── store/
+│   │   ├── auction/
+│   │   │   └── auctionSlice.ts
+│   │   └── index.ts
+│   ├── types/
+│   │   ├── auction/
+│   │   │   └── types.ts
+│   │   └── react-helmet.d.ts
+│   ├── App.css
+│   ├── App.tsx
+│   ├── index.css
+│   ├── index.tsx
+│   ├── logo.svg
+│   ├── main.tsx
+│   ├── react-app-env.d.ts
+│   ├── reportWebVitals.ts
+│   └── setupTests.ts
+├── package.json
+├── postcss.config.js
+├── README.md
+├── tailwind.config.js
+└── tsconfig.json

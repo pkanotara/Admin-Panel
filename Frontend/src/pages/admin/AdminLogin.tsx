@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Lock, User, Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
@@ -8,21 +10,30 @@ const AdminLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleLogin = async (e: any) => {
+  const navigate = useNavigate();
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    if (username === "admin" && password === "admin123") {
+
+    try {
+      const res = await fetch("http://localhost:5000/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Login failed");
+
+      localStorage.setItem("token", data.token);
+      alert("✅ Login successful!");
+      navigate("/admin/summary");
+    } catch (err: any) {
+      setError(err.message || "Server error. Please try again.");
+    } finally {
       setIsLoading(false);
-      // Success animation would trigger here
-      alert("Welcome admin!");
-    } else {
-      setIsLoading(false);
-      setError("Invalid credentials. Please try again.");
     }
   };
 
@@ -31,8 +42,8 @@ const AdminLogin = () => {
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500 rounded-full opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-500 rounded-full opacity-10 animate-pulse" style={{animationDelay: '4s'}}></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-500 rounded-full opacity-10 animate-pulse" style={{ animationDelay: '4s' }}></div>
       </div>
 
       {/* Main login container */}
@@ -121,7 +132,7 @@ const AdminLogin = () => {
 
         {/* Floating elements */}
         <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-60 animate-bounce"></div>
-        <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-60 animate-bounce" style={{animationDelay: '1s'}}></div>
+        <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-60 animate-bounce" style={{ animationDelay: '1s' }}></div>
       </div>
     </div>
   );
