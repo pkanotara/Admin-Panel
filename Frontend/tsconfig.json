@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // "ES5" works, but "ES6" is better with modern libs
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // no need to specify older ES2015/2016
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["react", "react-dom", "react-helmet"]
+  },
+  "include": ["src"]
+}
